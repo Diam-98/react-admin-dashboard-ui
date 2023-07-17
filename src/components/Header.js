@@ -1,32 +1,24 @@
-import {
-  CropFree,
-  GridView,
-  MenuOpen,
-  Notifications,
-  Search,
-  Settings,
-} from "@mui/icons-material";
-import React from "react";
+import { MenuOpen, Notifications, Search, Settings } from "@mui/icons-material";
 import avatar from "../images/avatar.png";
 
-const Header = () => {
+const Header = ({ isReduced, setIsReduced }) => {
+  const reduceSidebar = () => {
+    setIsReduced(!isReduced);
+  };
   return (
     <>
       <div className="header d-flex-align-justify">
-        <div className="logo">
-          <h1>
-            <span>DamilTech</span>Lab
-          </h1>
+        <div className="header-left-part">
+          <div className="logo">
+            <h4>
+              <span>DamilTech</span>Lab
+            </h4>
+          </div>
+          <MenuOpen onClick={reduceSidebar} className="sidebar-reduce-icon" />
         </div>
         <ul className="d-flex-align">
           <li>
             <Search className="menu-icon" />
-          </li>
-          <li>
-            <GridView className="menu-icon" />
-          </li>
-          <li>
-            <CropFree className="menu-icon" />
           </li>
           <li>
             <div className="icon-badge">

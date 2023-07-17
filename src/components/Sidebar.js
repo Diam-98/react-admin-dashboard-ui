@@ -1,6 +1,5 @@
 import {
   CalendarMonth,
-  Equalizer,
   Home,
   KeyboardAlt,
   PermIdentity,
@@ -8,45 +7,75 @@ import {
   TableView,
   Task,
 } from "@mui/icons-material";
-import React from "react";
+import { useState } from "react";
+import MenuItem from "./MenuItem";
 
-const Sidebar = () => {
+const menuItems = [
+  {
+    id: 1,
+    title: "Dashboard",
+    component: <Home />,
+    path: "/",
+  },
+  {
+    id: 2,
+    title: "Tables",
+    component: <TableView />,
+    path: "/tables",
+  },
+  {
+    id: 3,
+    title: "Profile",
+    component: <PermIdentity />,
+    path: "/profile",
+  },
+  {
+    id: 4,
+    title: "Calendrier",
+    component: <CalendarMonth />,
+    path: "/calendrier",
+  },
+  {
+    id: 5,
+    title: "Taches",
+    component: <Task />,
+    path: "/taches",
+  },
+  {
+    id: 6,
+    title: "Charts",
+    component: <KeyboardAlt />,
+    path: "/charts",
+  },
+  {
+    id: 7,
+    title: "Paramettres",
+    component: <Settings />,
+    path: "/paramettres",
+  },
+];
+
+const Sidebar = ({ isReduced }) => {
+  const [selectedItemId, setSelectedItemId] = useState(null);
+
+  const handleMenuItemSelect = (itemId) => {
+    setSelectedItemId(itemId);
+  };
+
   return (
     <>
-      <div className="sidebar">
+      <div className={isReduced ? "reduceSidebar" : "sidebar"}>
         <ul>
-          <li>
-            <Home />
-            <span>Dashboard</span>
-          </li>
-          <li>
-            <TableView />
-            <span>Tables</span>
-          </li>
-          <li>
-            <CalendarMonth />
-            <span>Calendrier</span>
-          </li>
-          <li>
-            <Task />
-            <span>Taches</span>
-          </li>
-          <li>
-            <KeyboardAlt />
-            <span>Formulaire</span>
-          </li>
-          <li>
-            <Equalizer />
-            <span>Charts</span>
-          </li>
-          <li>
-            <PermIdentity />
-            <span>Profile</span>
-          </li>
-          <li>
-            <Settings />
-            <span>Paramettre</span>
-          </li>
+          {menuItems.map((menuItem) => {
+            return (
+              <MenuItem
+                key={menuItem.id}
+                menuItem={menuItem}
+                isSelected={menuItem.id === selectedItemId}
+                onSelect={handleMenuItemSelect}
+              />
+            );
+          })}
         </ul>
       </div>
     </>
