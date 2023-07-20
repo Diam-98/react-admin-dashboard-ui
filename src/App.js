@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
-import Home from "./pages/Home";
+import { Outlet } from "react-router-dom";
 import BottomNavigation from "./components/BottomNavigation";
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
       <Header isReduced={isReduced} setIsReduced={setIsReduced} />
       <div className="body">
         <Sidebar isReduced={isReduced} />
-        <Home />
+        <Outlet />
         <BottomNavigation />
       </div>
     </div>

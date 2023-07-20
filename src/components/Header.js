@@ -1,10 +1,26 @@
 import { MenuOpen, Notifications, Search, Settings } from "@mui/icons-material";
 import avatar from "../images/avatar.png";
+import { useState } from "react";
+import { Drawer } from "antd";
+import { menuItems } from "../data/menuItems";
+import MenuItem from "./MenuItem";
 
 const Header = ({ isReduced, setIsReduced }) => {
+  const [open, setOpen] = useState(false);
+  const [selectedItemId, setSelectedItemId] = useState(null);
+
+  const handleMenuItemSelect = (itemId) => {
+    setSelectedItemId(itemId);
+  };
+
+  const openDrawer = () => {
+    setOpen(true);
+  };
+
   const reduceSidebar = () => {
     setIsReduced(!isReduced);
   };
+
   return (
     <>
       <div className="header d-flex-align-justify">
@@ -36,7 +52,21 @@ const Header = ({ isReduced, setIsReduced }) => {
             <Settings className="menu-icon" />
           </li>
         </ul>
-        <MenuOpen className="sidebar-open-icon" />
+        <MenuOpen className="sidebar-open-icon" onClick={openDrawer} />
+        <Drawer open={open} onClose={() => setOpen(false)} placement="left">
+          <ul>
+            {menuItems.map((menuItem) => {
+              return (
+                <MenuItem
+                  key={menuItem.id}
+                  menuItem={menuItem}
+                  isSelected={menuItem.id === selectedItemId}
+                  onSelect={handleMenuItemSelect}
+                />
+              );
+            })}
+          </ul>
+        </Drawer>
       </div>
     </>
   );
