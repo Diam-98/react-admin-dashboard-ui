@@ -419,6 +419,12 @@
   border-radius: 15px;
 }
 
+/* Post page */
+.dashboard-body .post-lis {
+  width: 100%;
+  padding: 15px;
+}
+
 @media screen and (max-width: 1000px) {
   .dashboard-body .statistics {
     grid-template-columns: repeat(2, 1fr);
