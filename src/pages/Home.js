@@ -1,171 +1,156 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import DashboardHeader from "../components/DashboardHeader";
-import { ArrowDownOutlined, ArrowUpOutlined } from "@ant-design/icons";
-import { LikeOutlined } from "@ant-design/icons";
-import { Card, Statistic } from "antd";
-import CountUp from "react-countup";
+import { AddOutlined } from "@mui/icons-material";
 import {
-  LineChart,
-  Line,
+  AreaChart,
+  Area,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from "recharts";
-import { BarChart, Bar } from "recharts";
-import { data_1, data_2 } from "../data/menuItems";
+import { views_data } from "../data/chats";
+import { Divider, Timeline } from "antd";
 
 const Home = () => {
-  class CustomizedLabel extends PureComponent {
-    render() {
-      const { x, y, stroke, value } = this.props;
-
-      return (
-        <text
-          x={x}
-          y={y}
-          dy={-4}
-          fill={stroke}
-          fontSize={10}
-          textAnchor="middle"
-        >
-          {value}
-        </text>
-      );
-    }
-  }
-
-  class CustomizedAxisTick extends PureComponent {
-    render() {
-      const { x, y, payload } = this.props;
-
-      return (
-        <g transform={`translate(${x},${y})`}>
-          <text
-            x={0}
-            y={0}
-            dy={16}
-            textAnchor="end"
-            fill="#666"
-            transform="rotate(-35)"
-          >
-            {payload.value}
-          </text>
-        </g>
-      );
-    }
-  }
-  const formatter = (value) => <CountUp end={value} separator="," />;
+  const buttons = [
+    {
+      icon: <AddOutlined />,
+      title: "Ajouter un post",
+    },
+  ];
 
   return (
-    <div className="dashboard-body">
-      <DashboardHeader title="Dashboard Admin" breadcrumbs="Accueil" />
-      <div className="statistics">
-        <div className="statistic-card">
-          <Card bordered={false}>
-            <Statistic title="Revenus" value={112893} formatter={formatter} />
-          </Card>
-        </div>
-        <div className="statistic-card">
-          <Card bordered={false}>
-            <Statistic
-              title="Feedback"
-              value={1128}
-              prefix={<LikeOutlined />}
-            />
-          </Card>
-        </div>
-        <div className="statistic-card">
-          <Card bordered={false}>
-            <Statistic title="Inscrits" value={93} suffix="/ 100" />
-          </Card>
-        </div>
-        <div className="statistic-card">
-          <Card bordered={false}>
-            <Statistic
-              title="Clients"
-              value={11.28}
-              precision={2}
-              valueStyle={{
-                color: "#3f8600",
-              }}
-              prefix={<ArrowUpOutlined />}
-              suffix="%"
-            />
-          </Card>
-        </div>
-        <div className="statistic-card">
-          <Card bordered={false}>
-            <Statistic
-              title="Ventes"
-              value={9.3}
-              precision={2}
-              valueStyle={{
-                color: "#cf1322",
-              }}
-              prefix={<ArrowDownOutlined />}
-              suffix="%"
-            />
-          </Card>
-        </div>
-      </div>
+    <>
+      <div className='dashboard-body'>
+        <DashboardHeader
+          title='Dashboard Admin'
+          breadcrumbs='Accueil'
+          buttons={buttons}
+        />
+        <div className='home-content'>
+          <div className='left'>
+            <div className='top'>
+              <p>Nombre de vues par articles</p>
+              <Divider />
+              <div style={{ width: "100%", height: 300 }}>
+                <ResponsiveContainer>
+                  <AreaChart
+                    data={views_data}
+                    margin={{
+                      top: 10,
+                      right: 30,
+                      left: 0,
+                      bottom: 0,
+                    }}
+                  >
+                    <CartesianGrid strokeDasharray='3 3' />
+                    <XAxis dataKey='name' />
+                    <YAxis />
+                    <Tooltip />
+                    <Area
+                      type='monotone'
+                      dataKey='uv'
+                      stroke='#8884d8'
+                      fill='#8884d8'
+                    />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+            <Divider />
+            <div className='bottom'>
+              <p>Article recents</p>
+              <Divider />
+              <div className='admin-recent-posts'>
+                <img
+                  src='https://www.wanadev.fr/uploads/posts/225/225-cover.jpg'
+                  alt='post-slug'
+                />
+                <div className='post-infos'>
+                  <h4>
+                    Créer facilement une API REST avec Symfony & API Platform
+                  </h4>
+                  <p>100 vues 16 commentaires</p>
+                </div>
+              </div>
+              <div className='admin-recent-posts'>
+                <img
+                  src='https://laravel.sillo.org/wp-content/uploads/2020/09/Capture-decran-2020-09-24-191912.png'
+                  alt='post-slug'
+                />
+                <div className='post-infos'>
+                  <h4>Créer facilement une API REST avec Laravel & API</h4>
+                  <p>100 vues 16 commentaires</p>
+                </div>
+              </div>
 
-      <div className="chartside">
-        <div className="chart-left">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart
-              width={500}
-              height={300}
-              data={data_1}
-              margin={{
-                top: 20,
-                right: 30,
-                left: 20,
-                bottom: 10,
-              }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" height={60} tick={<CustomizedAxisTick />} />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Line
-                type="monotone"
-                dataKey="pv"
-                stroke="#8884d8"
-                label={<CustomizedLabel />}
+              <div className='admin-recent-posts'>
+                <img
+                  src='https://waytolearnx.com/wp-content/uploads/2020/05/Comment-initialiser-un-ArrayList-en-Java-800x445.jpg?ezimgfmt=ng%3Awebp%2Fngcb1%2Frs%3Adevice%2Frscb1-1'
+                  alt='post-slug'
+                />
+                <div className='post-infos'>
+                  <h4>Les listes en java ArrayList</h4>
+                  <p>100 vues 16 commentaires</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='right'>
+            <div className='top'>
+              <p>Mise jours recentes</p>
+              <Divider />
+              <Timeline
+                mode='left'
+                items={[
+                  {
+                    label: "10 Nov",
+                    children: (
+                      <div className='post-update'>
+                        <p>Creer un tabs avec React JS</p>
+                      </div>
+                    ),
+                  },
+                  {
+                    label: "19 Aout",
+                    children: (
+                      <div className='post-update'>
+                        <p>Les listes en python</p>
+                      </div>
+                    ),
+                  },
+                  {
+                    label: "03 Sept",
+                    children: (
+                      <div className='post-update'>
+                        <p>Authentification JWT avec laravel</p>
+                      </div>
+                    ),
+                  },
+                ]}
               />
-              <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
-        <div className="chart-right">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-              width={500}
-              height={300}
-              data={data_2}
-              margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-              }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="pv" fill="#8884d8" />
-              <Bar dataKey="uv" fill="#82ca9d" />
-            </BarChart>
-          </ResponsiveContainer>
+            </div>
+            <Divider />
+            <div className='middle'>
+              <p>Statistiques</p>
+              <Divider />
+              <div className='statistics'>
+                <div className='item'>
+                  <h3>128</h3>
+                  <p>Articles</p>
+                </div>
+                <div className='item'>
+                  <h3>392</h3>
+                  <p>commentaires</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

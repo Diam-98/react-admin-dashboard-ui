@@ -7,12 +7,10 @@ import BottomNavigation from "./components/BottomNavigation";
 function App() {
   const [isReduced, setIsReduced] = useState(false);
 
-  console.log(isReduced);
-
   return (
-    <div className="main">
+    <div className='main'>
       <Header isReduced={isReduced} setIsReduced={setIsReduced} />
-      <div className="body">
+      <div className='body'>
         <Sidebar isReduced={isReduced} />
         <Outlet />
         <BottomNavigation />

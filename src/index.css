@@ -151,10 +151,25 @@
   padding: 15px;
   margin: 20px 15px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .dashboard-header h1 {
   margin: 10px 0;
+  font-size: 14px;
+}
+
+.dashboard-header .right .button {
+  display: flex;
+  align-items: center;
+  background-color: #0a1929;
+  color: white;
+}
+
+.dashboard-header .right .button:hover {
+  color: #f5f6f7;
 }
 
 .reduceSidebar {
@@ -318,6 +333,92 @@
   margin: 15px;
 }
 
+/* ------------------------------------------------- */
+/* ----------------- BLOG PART --------------------- */
+/* ------------------------------------------------- */
+/* Blog home */
+.dashboard-body .home-content {
+  display: flex;
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 30px;
+}
+
+.dashboard-body .home-content .left {
+  width: 60%;
+  border: 1px solid #dde0e3;
+  padding: 7px 10px;
+}
+
+.dashboard-body .home-content .left .top {
+  max-height: 500px;
+}
+
+.dashboard-body .home-content .right {
+  width: 40%;
+  border: 1px solid #dde0e3;
+  padding: 7px 10px;
+}
+
+.dashboard-body .home-content .right .top {
+  width: 100%;
+  max-height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: auto;
+}
+
+.dashboard-body .home-content .left .bottom {
+  width: 100%;
+  max-height: 500px;
+  overflow: auto;
+}
+
+.dashboard-body .home-content .left .bottom .admin-recent-posts {
+  display: flex;
+  margin: 8px 0;
+  padding: 4px;
+}
+
+.dashboard-body .home-content .left .bottom .admin-recent-posts:hover {
+  background-color: #dde0e3;
+}
+
+.dashboard-body .home-content .left .bottom .admin-recent-posts img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-right: 10px;
+}
+
+.dashboard-body .home-content .left .bottom .admin-recent-posts .post-infos {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.dashboard-body .home-content .left .bottom .admin-recent-posts .post-infos h4 {
+  font-size: 14px;
+}
+
+.dashboard-body .home-content .left .bottom .admin-recent-posts .post-infos p {
+  font-size: 13px;
+}
+
+/* right middle */
+.dashboard-body .home-content .right .middle .statistics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.dashboard-body .home-content .right .middle .statistics .item {
+  padding: 15px;
+  border: 1px solid;
+  border-radius: 15px;
+}
+
 @media screen and (max-width: 1000px) {
   .dashboard-body .statistics {
     grid-template-columns: repeat(2, 1fr);
@@ -335,9 +436,29 @@
   }
 }
 
+@media (max-width: 1070px) {
+  .dashboard-body .home-content {
+    flex-direction: column;
+  }
+
+  .dashboard-body .home-content .left {
+    width: 100%;
+  }
+
+  .dashboard-body .home-content .right {
+    width: 100%;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .dashboard-body .statistics {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 420px) {
+  .dashboard-header {
+    flex-direction: column;
   }
 }
 

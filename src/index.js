@@ -4,12 +4,12 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import TableComp from "./pages/Table";
-import CalendarComp from "./pages/CalendarComp";
-import TaskList from "./pages/TaskList";
-import ChartComp from "./pages/ChartComp";
-import ProfileComp from "./pages/ProfileComp";
 import SettingComp from "./pages/SettingsComp";
+import PostComp from "./pages/PostComtp";
+import CommentComp from "./pages/CommentComp";
+import CategoryComp from "./pages/CategoryComp";
+import SubCategorieComp from "./pages/SubCategorieComp";
+import UsersComp from "./pages/UsersComp";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -17,13 +17,13 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route element={<App />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/tables" element={<TableComp />} />
-          <Route path="/profile" element={<ProfileComp />} />
-          <Route path="/calendrier" element={<CalendarComp />} />
-          <Route path="/taches" element={<TaskList />} />
-          <Route path="/charts" element={<ChartComp />} />
-          <Route path="/paramettres" element={<SettingComp />} />
+          <Route path='/' element={<Home />} />
+          <Route path='/posts' element={<PostComp />} />
+          <Route path='/commentaires' element={<CommentComp />} />
+          <Route path='/categories' element={<CategoryComp />} />
+          <Route path='/sous-categories' element={<SubCategorieComp />} />
+          <Route path='/users' element={<UsersComp />} />
+          <Route path='/paramettres' element={<SettingComp />} />
         </Route>
       </Routes>
     </BrowserRouter>
